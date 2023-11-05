@@ -16,10 +16,10 @@ public class CandidateEntity {
   private String name;
 
   @NotBlank
-  @Pattern(regexp = "\\S+", message = "O campo (username)  nao deve conter espaços em branco")
+  @Pattern(regexp = "\\S+", message = "The field (username) must not contain blanks")
   private String username;
 
-  @Email(message = "O campo (email) deve conter um e-mail valido")
+  @Email(message = "The field (email) must contain a valid email address")
   private String email;
 
   @Length(min = 10, max = 100)
