@@ -23,6 +23,7 @@ public class SecurityConfig {
     return httpSecurity.build();
   }
 
+  @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
