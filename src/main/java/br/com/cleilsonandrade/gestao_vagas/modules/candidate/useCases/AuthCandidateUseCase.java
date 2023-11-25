@@ -43,13 +43,14 @@ public class AuthCandidateUseCase {
     }
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
+    var expiresIn = Instant.now().plus(Duration.ofHours(2));
     var token = JWT.create()
         .withIssuer("cleilsonandrade")
         .withSubject(candidate.getId().toString())
         .withClaim("roles", Arrays.asList("candidate"))
-        .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+        .withExpiresAt(expiresIn)
         .sign(algorithm);
 
-    return AuthCandidateResponseDTO.builder().access_token(token).build();
+    return AuthCandidateResponseDTO.builder().access_token(token).expires_in(expiresIn.toEpochMilli()).build();
   }
 }
