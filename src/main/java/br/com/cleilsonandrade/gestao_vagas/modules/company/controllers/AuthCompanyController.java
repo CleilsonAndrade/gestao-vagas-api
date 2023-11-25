@@ -14,12 +14,12 @@ import br.com.cleilsonandrade.gestao_vagas.modules.company.dto.AuthCompanyDTO;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.useCases.AuthCompanyUseCase;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/companies")
 public class AuthCompanyController {
   @Autowired
   private AuthCompanyUseCase authCompanyUseCase;
 
-  @PostMapping("/companies")
+  @PostMapping("/auth")
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
     try {
       var result = this.authCompanyUseCase.execute(authCompanyDTO);
