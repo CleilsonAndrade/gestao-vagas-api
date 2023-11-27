@@ -22,13 +22,13 @@ public class SecurityConfig {
 
   private static final String[] SWAGGER_LIST = {
       "/swagger-ui/**",
-      "/V3/api-docs/**",
-      "/swagger-resources/**",
+      "/v3/api-docs/**",
+      "/swagger-resource/**",
   };
 
   @Bean
-  SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf(csrf -> csrf.disable())
+  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> {
           auth.requestMatchers("/candidates/").permitAll()
               .requestMatchers("/companies/").permitAll()
@@ -39,8 +39,7 @@ public class SecurityConfig {
         })
         .addFilterBefore(securityCandidateFilter, BasicAuthenticationFilter.class)
         .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
-
-    return httpSecurity.build();
+    return http.build();
   }
 
   @Bean
