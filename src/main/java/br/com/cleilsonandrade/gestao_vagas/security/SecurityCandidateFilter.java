@@ -50,6 +50,7 @@ public class SecurityCandidateFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext(),
             grants);
 
+        SecurityContextHolder.getContext().setAuthentication(auth);
       }
     }
 
