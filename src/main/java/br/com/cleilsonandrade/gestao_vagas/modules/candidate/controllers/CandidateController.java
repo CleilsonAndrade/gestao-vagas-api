@@ -45,7 +45,7 @@ public class CandidateController {
   private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
 
   @PostMapping
-  @Operation(summary = "Cadastro de candidato", description = "Its function is to register the candidate")
+  @Operation(summary = "Candidate registration", description = "Its function is to register the candidate")
   @ApiResponses({
       @ApiResponse(responseCode = "200", content = {
           @Content(schema = @Schema(implementation = CandidateEntity.class)) }),
