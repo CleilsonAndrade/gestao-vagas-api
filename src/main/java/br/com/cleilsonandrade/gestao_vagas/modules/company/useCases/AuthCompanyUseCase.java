@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -31,6 +32,7 @@ public class AuthCompanyUseCase {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  @Transactional(readOnly = true)
   public AuthCompanyResponseDTOBuilder execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
     var company = companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(
         () -> {
