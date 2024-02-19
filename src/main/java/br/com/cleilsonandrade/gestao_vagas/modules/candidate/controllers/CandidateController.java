@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cleilsonandrade.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.ListAllJobsByFilterUseCase;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.ProfileCandidateUseCase;

@@ -43,8 +43,9 @@ public class JobEntity {
   private String level;
 
   @ManyToOne()
-  @JoinColumn(name = "company_id", insertable = false, updatable = false)
+  @JoinColumn(name = "id_company", insertable = false, updatable = false)
   private CompanyEntity companyEntity;
+
   @Column(name = "company_id", nullable = false)
   private UUID companyId;
 

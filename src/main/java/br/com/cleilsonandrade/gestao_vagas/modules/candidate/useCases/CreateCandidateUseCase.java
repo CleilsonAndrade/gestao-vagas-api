@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleilsonandrade.gestao_vagas.exceptions.UserFoundException;
-import br.com.cleilsonandrade.gestao_vagas.modules.candidate.CandidateEntity;
+import br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 
 @Service

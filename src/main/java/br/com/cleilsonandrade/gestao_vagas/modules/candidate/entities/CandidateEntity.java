@@ -1,4 +1,4 @@
-package br.com.cleilsonandrade.gestao_vagas.modules.candidate;
+package br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,11 +16,17 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity(name = "candidate")
 @Table(name = "tb_candidate")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CandidateEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

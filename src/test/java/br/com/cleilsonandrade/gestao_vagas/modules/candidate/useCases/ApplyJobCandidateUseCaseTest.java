@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.cleilsonandrade.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.cleilsonandrade.gestao_vagas.exceptions.UserNotFoundException;
-import br.com.cleilsonandrade.gestao_vagas.modules.candidate.CandidateEntity;
+import br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.repositories.JobRepository;
 

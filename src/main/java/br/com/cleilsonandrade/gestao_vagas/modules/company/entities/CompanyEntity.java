@@ -14,11 +14,17 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "company")
 @Table(name = "tb_company")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompanyEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
