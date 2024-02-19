@@ -29,7 +29,7 @@ public class SecurityCandidateFilter extends OncePerRequestFilter {
     if (request.getRequestURI().startsWith("/candidates")) {
 
       if (header != null && header.startsWith("Bearer ")) {
-        var token = this.jwtCandidateProvider.validateToken(header);
+        var token = jwtCandidateProvider.validateToken(header);
 
         if (token == null) {
           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

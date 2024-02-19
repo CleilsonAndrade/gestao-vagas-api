@@ -17,7 +17,7 @@ public class ProfileCandidateUseCase {
 
   @Transactional(readOnly = true)
   public ProfileCandidateResponseDTO execute(UUID idCandidate) {
-    var candidate = this.candidateRepository.findById(idCandidate).orElseThrow(() -> {
+    var candidate = candidateRepository.findById(idCandidate).orElseThrow(() -> {
       throw new UsernameNotFoundException("User not found");
     });
 

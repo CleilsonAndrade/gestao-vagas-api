@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities.CandidateEntity;
+import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.ApplyJobCandidateUseCase;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.ListAllJobsByFilterUseCase;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.ProfileCandidateUseCase;
@@ -44,6 +45,9 @@ public class CandidateController {
   @Autowired
   private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
 
+  @Autowired
+  private ApplyJobCandidateUseCase applyJobCandidateUseCase;
+
   @PostMapping
   @Operation(summary = "Candidate registration", description = "Its function is to register the candidate")
   @ApiResponses({
@@ -53,7 +57,7 @@ public class CandidateController {
   })
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
     try {
-      var result = this.createCandidateUseCase.execute(candidateEntity);
+      var result = createCandidateUseCase.execute(candidateEntity);
 
       return ResponseEntity.ok().body(result);
     } catch (Exception e) {
@@ -74,7 +78,7 @@ public class CandidateController {
     var idCandidate = request.getAttribute("candidate_id");
 
     try {
-      var profile = this.profileCandidateUseCase.execute(UUID.fromString(idCandidate.toString()));
+      var profile = profileCandidateUseCase.execute(UUID.fromString(idCandidate.toString()));
       return ResponseEntity.ok().body(profile);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());
@@ -90,6 +94,22 @@ public class CandidateController {
   })
   @SecurityRequirement(name = "jwt_auth")
   public List<JobEntity> findJobByFilter(@RequestParam String filter) {
-    return this.listAllJobsByFilterUseCase.execute(filter);
+    return listAllJobsByFilterUseCase.execute(filter);
+  }
+
+  @PostMapping("/jobs/apply")
+  @PreAuthorize("hasRole('CANDIDATE')")
+  @Operation(summary = "Candidate registration for a vacancy", description = "This role is responsible for registering the candidate for a vacancy")
+  @SecurityRequirement(name = "jwt_auth")
+  public ResponseEntity<Object> applyJob(HttpServletRequest request, @RequestBody UUID idJob) {
+    var idCandidate = request.getAttribute("candidate_id");
+
+    try {
+      var result = applyJobCandidateUseCase.execute(UUID.fromString(idCandidate.toString()), idJob);
+
+      return ResponseEntity.ok().body(result);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
   }
 }

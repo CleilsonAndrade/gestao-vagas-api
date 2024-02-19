@@ -14,6 +14,6 @@ public class CreateJobUseCase {
 
   @Transactional
   public JobEntity execute(JobEntity jobEntity) {
-    return this.jobRepository.save(jobEntity);
+    return jobRepository.save(jobEntity);
   }
 }

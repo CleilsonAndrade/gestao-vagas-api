@@ -19,7 +19,7 @@ public class AuthCandidateController {
   @PostMapping("/auth")
   public ResponseEntity<Object> auth(@RequestBody AuthCandidateRequestDTO authCandidateRequestDTO) {
     try {
-      var token = this.authCandidateUseCase.execute(authCandidateRequestDTO);
+      var token = authCandidateUseCase.execute(authCandidateRequestDTO);
       return ResponseEntity.ok().body(token);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());

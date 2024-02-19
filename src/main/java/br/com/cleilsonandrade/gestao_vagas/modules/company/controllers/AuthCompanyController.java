@@ -22,7 +22,7 @@ public class AuthCompanyController {
   @PostMapping("/auth")
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
     try {
-      var result = this.authCompanyUseCase.execute(authCompanyDTO);
+      var result = authCompanyUseCase.execute(authCompanyDTO);
 
       return ResponseEntity.ok().body(result);
     } catch (Exception e) {

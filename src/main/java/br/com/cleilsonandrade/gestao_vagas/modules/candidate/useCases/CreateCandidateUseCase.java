@@ -19,14 +19,14 @@ public class CreateCandidateUseCase {
 
   @Transactional()
   public CandidateEntity execute(CandidateEntity candidateEntity) {
-    this.candidateRepository.findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
+    candidateRepository.findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
         .ifPresent((user) -> {
           throw new UserFoundException();
         });
 
-    var password = this.passwordEncoder.encode(candidateEntity.getPassword());
+    var password = passwordEncoder.encode(candidateEntity.getPassword());
     candidateEntity.setPassword(password);
 
-    return this.candidateRepository.save(candidateEntity);
+    return candidateRepository.save(candidateEntity);
   }
 }

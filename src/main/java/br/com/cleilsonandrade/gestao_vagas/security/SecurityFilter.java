@@ -28,7 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     if (request.getRequestURI().startsWith("/companies")) {
 
       if (header != null) {
-        var token = this.jwtProvider.validateToken(header);
+        var token = jwtProvider.validateToken(header);
 
         if (token == null) {
           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

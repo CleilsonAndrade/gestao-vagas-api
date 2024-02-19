@@ -17,6 +17,6 @@ public class ListAllJobsByFilterUseCase {
 
   @Transactional(readOnly = true)
   public List<JobEntity> execute(String filter) {
-    return this.jobRepository.findByDescriptionContainingIgnoreCase(filter);
+    return jobRepository.findByDescriptionContainingIgnoreCase(filter);
   }
 }

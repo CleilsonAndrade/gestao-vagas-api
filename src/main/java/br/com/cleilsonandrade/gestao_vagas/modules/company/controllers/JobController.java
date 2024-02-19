@@ -52,6 +52,6 @@ public class JobController {
         .level(createJobDTO.getLevel())
         .build();
 
-    return this.createJobUseCase.execute(jobEntity);
+    return createJobUseCase.execute(jobEntity);
   }
 }

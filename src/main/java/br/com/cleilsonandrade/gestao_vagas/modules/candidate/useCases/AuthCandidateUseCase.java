@@ -38,7 +38,7 @@ public class AuthCandidateUseCase {
       throw new UsernameNotFoundException("Username or password incorrect");
     });
 
-    var passwordMatches = this.passwordEncoder.matches(authCandidateRequestDTO.password(), candidate.getPassword());
+    var passwordMatches = passwordEncoder.matches(authCandidateRequestDTO.password(), candidate.getPassword());
 
     if (!passwordMatches) {
       throw new AuthenticationException();
