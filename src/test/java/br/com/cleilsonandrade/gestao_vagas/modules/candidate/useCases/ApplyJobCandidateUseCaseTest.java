@@ -14,8 +14,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.cleilsonandrade.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.cleilsonandrade.gestao_vagas.exceptions.UserNotFoundException;
+import br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities.ApplyJobEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.entities.CandidateEntity;
+import br.com.cleilsonandrade.gestao_vagas.modules.candidate.repositories.ApplyJobRepository;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.repositories.CandidateRepository;
+import br.com.cleilsonandrade.gestao_vagas.modules.company.entities.JobEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.repositories.JobRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,6 +31,9 @@ public class ApplyJobCandidateUseCaseTest {
 
   @Mock
   private JobRepository jobRepository;
+
+  @Mock
+  private ApplyJobRepository applyJobRepository;
 
   @Test
   public void shouldNotBeAbleTo_ApplyJob_CandidateNotFound() {
@@ -51,5 +57,33 @@ public class ApplyJobCandidateUseCaseTest {
     } catch (Exception e) {
       assertThat(e).isInstanceOf(JobNotFoundException.class);
     }
+  }
+
+  @Test
+  public void shouldBeAbleTo_CreateANew_ApplyJob() {
+    var idCandidate = UUID.randomUUID();
+    var idJob = UUID.randomUUID();
+
+    CandidateEntity candidateEntity = new CandidateEntity();
+    candidateEntity.setId(idCandidate);
+
+    JobEntity jobEntity = new JobEntity();
+    jobEntity.setId(idJob);
+
+    var applyJob = ApplyJobEntity.builder()
+        .candidate(candidateEntity)
+        .job(jobEntity)
+        .build();
+
+    var applyJobCreated = ApplyJobEntity.builder().id(UUID.randomUUID()).build();
+
+    when(candidateRepository.findById(idCandidate)).thenReturn(Optional.of(new CandidateEntity()));
+    when(jobRepository.findById(idJob)).thenReturn(Optional.of(new JobEntity()));
+
+    when(applyJobRepository.save(applyJob)).thenReturn(applyJobCreated);
+
+    var result = applyJobCandidateUseCase.execute(idCandidate, idJob);
+
+    assertThat(result).hasFieldOrProperty("id");
   }
 }

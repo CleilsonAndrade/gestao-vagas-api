@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cleilsonandrade.gestao_vagas.modules.company.dto.CreateJobDTO;
+import br.com.cleilsonandrade.gestao_vagas.modules.company.entities.CompanyEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.entities.JobEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.useCases.CreateJobUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,8 +42,11 @@ public class JobController {
   public JobEntity create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
     var companyId = request.getAttribute("company_id");
 
+    CompanyEntity companyEntity = new CompanyEntity();
+    companyEntity.setId(UUID.fromString(companyId.toString()));
+
     var jobEntity = JobEntity.builder()
-        .companyId(UUID.fromString(companyId.toString()))
+        .company(companyEntity)
         .benefits(createJobDTO.getBenefits())
         .description(createJobDTO.getDescription())
         .level(createJobDTO.getLevel())
