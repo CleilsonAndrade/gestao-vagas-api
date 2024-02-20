@@ -1,7 +1,5 @@
 package br.com.cleilsonandrade.gestao_vagas.modules.company.controllers;
 
-import java.util.UUID;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +17,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import br.com.cleilsonandrade.gestao_vagas.modules.company.dto.CreateJobDTO;
+import br.com.cleilsonandrade.gestao_vagas.modules.company.entities.CompanyEntity;
+import br.com.cleilsonandrade.gestao_vagas.modules.company.repositories.CompanyRepository;
 import br.com.cleilsonandrade.gestao_vagas.utils.TestUtils;
 
 @RunWith(SpringRunner.class)
@@ -31,6 +31,9 @@ public class CreateJobControllerTest {
   @Autowired
   private WebApplicationContext context;
 
+  @Autowired
+  private CompanyRepository companyRepository;
+
   @Before
   public void setup() {
     mvc = MockMvcBuilders
@@ -41,6 +44,15 @@ public class CreateJobControllerTest {
 
   @Test
   public void shouldBeAbleTo_CreateANewJob() throws Exception {
+    var company = CompanyEntity.builder()
+        .description("COMPANY_DESCRIPTION")
+        .email("email@company.com")
+        .password("1234567890")
+        .username("COMPANY_USERNAME")
+        .name("COMPANY_NAME")
+        .build();
+
+    company = companyRepository.saveAndFlush(company);
 
     var createJobDTO = CreateJobDTO.builder()
         .benefits("BENEFITS_TEST")
@@ -52,7 +64,7 @@ public class CreateJobControllerTest {
         MockMvcRequestBuilders.post("/companies/jobs/")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtils.objectToJson(createJobDTO))
-            .header("Authorization", TestUtils.generateToken(UUID.randomUUID(),
+            .header("Authorization", TestUtils.generateToken(company.getId(),
                 "eyJhbGciOiJIUzI1NiJ9.eyJJc3N1ZXIiOiJjbGVpbHNvbmFuZHJhZGUiLCJleHAiOjE2OTkyODc3NTcsImlhdCI6MTY5OTI4Nzc1N30.dib1N8tlKtMufq17pSBUL2TIZepfHd9tfs-WGwcm76E")))
         .andExpect(MockMvcResultMatchers.status().isOk());
 

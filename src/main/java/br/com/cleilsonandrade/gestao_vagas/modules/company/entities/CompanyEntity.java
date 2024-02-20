@@ -31,6 +31,9 @@ public class CompanyEntity {
   private UUID id;
 
   @NotBlank
+  private String name;
+
+  @NotBlank
   @Pattern(regexp = "\\S+", message = "The field (username) must not contain blanks")
   private String username;
 
