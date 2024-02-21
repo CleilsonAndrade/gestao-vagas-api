@@ -1,5 +1,7 @@
 package br.com.cleilsonandrade.gestao_vagas.modules.company.controllers;
 
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,4 +73,21 @@ public class CreateJobControllerTest {
     System.out.println(result);
   }
 
+  @Test
+  public void shouldNotBeAbleTo_CreateANewJob_IfCompanyNotFound() throws Exception {
+    var createJobDTO = CreateJobDTO.builder()
+        .benefits("BENEFITS_TEST")
+        .description("DESCRIPTION_TEST")
+        .level("LEVEL_TEST")
+        .build();
+
+    mvc.perform(
+        MockMvcRequestBuilders.post("/companies/jobs/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtils.objectToJson(createJobDTO))
+            .header("Authorization", TestUtils.generateToken(UUID.randomUUID(),
+                "eyJhbGciOiJIUzI1NiJ9.eyJJc3N1ZXIiOiJjbGVpbHNvbmFuZHJhZGUiLCJleHAiOjE2OTkyODc3NTcsImlhdCI6MTY5OTI4Nzc1N30.dib1N8tlKtMufq17pSBUL2TIZepfHd9tfs-WGwcm76E")))
+        .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+  }
 }
