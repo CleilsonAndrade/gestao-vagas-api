@@ -9,15 +9,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cleilsonandrade.gestao_vagas.modules.company.entities.CompanyEntity;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.useCases.CreateCompanyUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/companies")
+@Tag(name = "Companies", description = "Companies information")
 public class CompanyController {
   @Autowired
   private CreateCompanyUseCase createCompanyUseCase;
 
   @PostMapping
+  @Operation(summary = "Companies registration", description = "Its function is to register the company")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", content = {
+          @Content(schema = @Schema(implementation = CompanyEntity.class)) }),
+      @ApiResponse(responseCode = "400", description = "Company already exists")
+  })
   public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {
     try {
       var result = createCompanyUseCase.execute(companyEntity);

@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.dto.AuthCandidateRequestDTO;
 import br.com.cleilsonandrade.gestao_vagas.modules.candidate.useCases.AuthCandidateUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/candidates")
+@Tag(name = "Candidate", description = "Candidate information")
 public class AuthCandidateController {
   @Autowired
   private AuthCandidateUseCase authCandidateUseCase;
 
   @PostMapping("/auth")
+  @Operation(summary = "Authentication of candidate", description = "This function is responsible authenticate a candidate")
   public ResponseEntity<Object> auth(@RequestBody AuthCandidateRequestDTO authCandidateRequestDTO) {
     try {
       var token = authCandidateUseCase.execute(authCandidateRequestDTO);

@@ -12,14 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cleilsonandrade.gestao_vagas.modules.company.dto.AuthCompanyDTO;
 import br.com.cleilsonandrade.gestao_vagas.modules.company.useCases.AuthCompanyUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/companies")
+@Tag(name = "Companies", description = "Companies information")
 public class AuthCompanyController {
   @Autowired
   private AuthCompanyUseCase authCompanyUseCase;
 
   @PostMapping("/auth")
+  @Operation(summary = "Authentication of company", description = "This function is responsible authenticate a company")
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
     try {
       var result = authCompanyUseCase.execute(authCompanyDTO);

@@ -13,13 +13,13 @@ public class SwaggerConfig {
   public OpenAPI openAPI() {
     return new OpenAPI()
         .info(new Info()
-            .title("Gestão de Vagas")
+            .title("Gestão de Vagas - API")
             .description("API for vacancy management")
             .version("1"))
-        .schemaRequirement("jwt_auth", creaSecurityScheme());
+        .schemaRequirement("jwt_auth", createSecurityScheme());
   }
 
-  private SecurityScheme creaSecurityScheme() {
+  private SecurityScheme createSecurityScheme() {
     return new SecurityScheme()
         .name("jwt_auth")
         .type(SecurityScheme.Type.HTTP)
