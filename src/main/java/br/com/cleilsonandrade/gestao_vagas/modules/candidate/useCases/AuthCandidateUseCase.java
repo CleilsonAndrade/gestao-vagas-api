@@ -44,15 +44,18 @@ public class AuthCandidateUseCase {
       throw new AuthenticationException();
     }
 
+    var roles = Arrays.asList("CANDIDATE");
+
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
     var expiresIn = Instant.now().plus(Duration.ofHours(2));
     var token = JWT.create()
         .withIssuer("cleilsonandrade")
         .withSubject(candidate.getId().toString())
-        .withClaim("roles", Arrays.asList("CANDIDATE"))
+        .withClaim("roles", roles)
         .withExpiresAt(expiresIn)
         .sign(algorithm);
 
-    return AuthCandidateResponseDTO.builder().access_token(token).expires_in(expiresIn.toEpochMilli()).build();
+    return AuthCandidateResponseDTO.builder().access_token(token).expires_in(expiresIn.toEpochMilli()).roles(roles)
+        .build();
   }
 }
