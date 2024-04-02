@@ -15,13 +15,13 @@
 # 📃 <span id="descrição">Descrição</span>
 Gestão Vagas API é uma API Rest, que foi desenvolvida com de gerenciamento para cadastramento de empresa e suas vagas de emprego e candidatos para o preenchimento das mesmas. Com possibilidades de cadastramento de vagas, aplicação do candidato e filtro de busca pelo mesmo, exibição do currículo do candidato e listagem de informações das vagas. Desenvolvido utilizando as tecnologias [**Java**](https://www.java.com/) e o framework [**Spring**](https://spring.io/), com banco de dados [**MySQL**](https://www.mysql.com/) e [**H2 Database**](https://www.h2database.com/) e cobertura de testes com [**JUnit**](https://junit.org/junit5/), autenticação usando o [**Spring Security**](https://spring.io/projects/spring-security), token [**JWT**](https://jwt.io/), encriptação de senhas utilizando [**BCrypt**](https://en.wikipedia.org/wiki/Bcrypt) e documentação desenvolvida pelo [**Swagger**](https://swagger.io/), tornando a aplicação flexível e robusta.
 
-Aplicação desenvolvida utilizando a API do [**GitHub**](https://docs.github.com/pt/rest/guides/getting-started-with-the-rest-api), para realizar busca de usuários, utilizando a lib [**axios**](https://github.com/axios/axios) para requisições e respostas.
-
 # 📌 <span id="requisitos">Requisitos Funcionais</span>
-- [x] Validação de usuários<br>
-- [x] Consulta e exibição dos dados do usuários<br>
-- [x] Salva os dados do usuário<br>
-- [x] Mostra vacinas obrigatórias<br>
+- [x] Realizar o cadastro de um usuário representando a empresa<br>
+- [x] Cadastro de vaga por um usuário com perfil de empresa<br>
+- [x] Realizar o cadastro do usuário com perfil de candidato<br>
+- [x] Listar o currículo da usuário com perfil de candidato<br>
+- [x] Listar as vagas disponíveis para o usuário com perfil de candidato por um filtro<br>
+- [x] Aplicar o usuário com perfil de candidato a uma vaga<br>
 
 ## Features
 - [x] Autenticação de usuário utilizando JWT Token<br>
@@ -30,7 +30,7 @@ Aplicação desenvolvida utilizando a API do [**GitHub**](https://docs.github.co
 - [x] Modelo de domínio complexo<br>
 - [x] Projeção com SQL nativo<br>
 - [x] Cobertura de testes<br>
-- [x] Docker-compose com imagem para um banco PostgreSQL<br>
+- [x] Docker-compose com imagem para um banco de dados PostgreSQL<br>
 
 # 💻 <span id="tecnologias">Tecnologias</span>
 - **Java**
