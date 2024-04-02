@@ -39,7 +39,7 @@ public class JobController {
           @Content(schema = @Schema(implementation = JobEntity.class))
       }),
   })
-  @SecurityRequirement(name = "jwt_auth")
+  @SecurityRequirement(name = "security")
   public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
     var companyId = request.getAttribute("company_id");
 

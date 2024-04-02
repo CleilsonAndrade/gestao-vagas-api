@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
@@ -15,15 +17,19 @@ public class SwaggerConfig {
         .info(new Info()
             .title("Gestão de Vagas - API")
             .description("API for vacancy management")
-            .version("1"))
-        .schemaRequirement("jwt_auth", createSecurityScheme());
+            .version("v1")
+            .license(new License().name("MIT")
+                .url("https://raw.githubusercontent.com/CleilsonAndrade/gestao-vagas-api/main/LICENSE"))
+            .contact(new Contact().email("cleilsonjose@hotmail.com").name("Cleilson Andrade")))
+        .schemaRequirement("security", createSecurityScheme());
   }
 
   private SecurityScheme createSecurityScheme() {
     return new SecurityScheme()
-        .name("jwt_auth")
+        .name("security")
+        .description("Enter a 'Bearer' token to proceed")
         .type(SecurityScheme.Type.HTTP)
-        .scheme("bearer")
+        .scheme("Bearer")
         .bearerFormat("JWT");
   }
 }

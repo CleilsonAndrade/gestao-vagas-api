@@ -73,7 +73,7 @@ public class CandidateController {
           @Content(schema = @Schema(implementation = ProfileCandidateResponseDTO.class)) }),
       @ApiResponse(responseCode = "400", description = "User not found")
   })
-  @SecurityRequirement(name = "jwt_auth")
+  @SecurityRequirement(name = "security")
   public ResponseEntity<Object> get(HttpServletRequest request) {
     var idCandidate = request.getAttribute("candidate_id");
 
@@ -92,7 +92,7 @@ public class CandidateController {
       @ApiResponse(responseCode = "200", content = {
           @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class))) })
   })
-  @SecurityRequirement(name = "jwt_auth")
+  @SecurityRequirement(name = "security")
   public List<JobEntity> findJobByFilter(@RequestParam String filter) {
     return listAllJobsByFilterUseCase.execute(filter);
   }
@@ -100,7 +100,7 @@ public class CandidateController {
   @PostMapping("/jobs/apply")
   @PreAuthorize("hasRole('CANDIDATE')")
   @Operation(summary = "Candidate registration for a vacancy", description = "This role is responsible for registering the candidate for a vacancy")
-  @SecurityRequirement(name = "jwt_auth")
+  @SecurityRequirement(name = "security")
   public ResponseEntity<Object> applyJob(HttpServletRequest request, @RequestBody UUID idJob) {
     var idCandidate = request.getAttribute("candidate_id");
 
