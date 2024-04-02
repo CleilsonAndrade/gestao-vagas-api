@@ -11,7 +11,7 @@
 	<groupId>br.com.cleilsonandrade</groupId>
 	<artifactId>gestao-vagas-api</artifactId>
 	<version>1.0.0</version>
-	<name>Gestao Vagas API</name>
+	<name>Gestão Vagas API</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>

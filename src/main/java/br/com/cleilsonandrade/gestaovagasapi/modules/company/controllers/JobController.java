@@ -25,12 +25,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/companies/jobs")
+@RequestMapping("/companies")
 public class JobController {
   @Autowired
   private CreateJobUseCase createJobUseCase;
 
-  @PostMapping
+  @PostMapping("/jobs")
   @PreAuthorize("hasRole('COMPANY')")
   @Tag(name = "Vacancies", description = "Vacancies information")
   @Operation(summary = "Vacancy registration", description = "This role is responsible for registering the vacancy in the company")
