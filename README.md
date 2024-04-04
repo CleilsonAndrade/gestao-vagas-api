@@ -69,7 +69,7 @@ Gestão Vagas API é uma API Rest, que foi desenvolvida com de gerenciamento par
   $ cd ./gestao-vagas-api
 
   # Instalar as dependências:
-  $ mvn clean instal
+  $ mvn clean install
 
   # Executar:
   $ mvn spring-boot:run
