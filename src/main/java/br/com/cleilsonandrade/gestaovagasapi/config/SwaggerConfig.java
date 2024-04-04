@@ -18,9 +18,10 @@ public class SwaggerConfig {
             .title("Gestão de Vagas - API")
             .description("API for vacancy management")
             .version("v1")
-            .license(new License().name("MIT")
+            .license(new License().name("License")
                 .url("https://raw.githubusercontent.com/CleilsonAndrade/gestao-vagas-api/main/LICENSE"))
-            .contact(new Contact().email("cleilsonjose@hotmail.com").name("Cleilson Andrade")))
+            .contact(new Contact().email("cleilsonjose@hotmail.com").name("Cleilson Andrade")
+                .url("https://www.linkedin.com/in/cleilson-andrade/")))
         .schemaRequirement("security", createSecurityScheme());
   }
 
