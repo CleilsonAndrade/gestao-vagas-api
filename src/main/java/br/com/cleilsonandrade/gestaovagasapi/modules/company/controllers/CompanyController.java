@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -25,10 +24,9 @@ public class CompanyController {
   private CreateCompanyUseCase createCompanyUseCase;
 
   @PostMapping
-  @Operation(summary = "Companies registration", description = "Its function is to register the company")
-  @ApiResponses({
+  @Operation(summary = "Companies registration", description = "Its function is to register the company", responses = {
       @ApiResponse(responseCode = "200", content = {
-          @Content(schema = @Schema(implementation = CompanyEntity.class)) }),
+          @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyEntity.class)) }),
       @ApiResponse(responseCode = "400", description = "Company already exists")
   })
   public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {

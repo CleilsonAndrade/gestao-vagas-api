@@ -21,11 +21,12 @@ import br.com.cleilsonandrade.gestaovagasapi.modules.candidate.useCases.ListAllJ
 import br.com.cleilsonandrade.gestaovagasapi.modules.candidate.useCases.ProfileCandidateUseCase;
 import br.com.cleilsonandrade.gestaovagasapi.modules.company.entities.JobEntity;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,10 +50,9 @@ public class CandidateController {
   private ApplyJobCandidateUseCase applyJobCandidateUseCase;
 
   @PostMapping
-  @Operation(summary = "Candidate registration", description = "Its function is to register the candidate")
-  @ApiResponses({
+  @Operation(summary = "Candidate registration", description = "Its function is to register the candidate", responses = {
       @ApiResponse(responseCode = "200", content = {
-          @Content(schema = @Schema(implementation = CandidateEntity.class)) }),
+          @Content(mediaType = "application/json", schema = @Schema(implementation = CandidateEntity.class)) }),
       @ApiResponse(responseCode = "400", description = "User already exists")
   })
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
@@ -67,13 +67,13 @@ public class CandidateController {
 
   @GetMapping
   @PreAuthorize("hasRole('CANDIDATE')")
-  @Operation(summary = "Candidate information", description = "This role is responsible for listing all information about the candidate")
-  @ApiResponses({
+  @Operation(summary = "Candidate information", description = "This role is responsible for listing all information about the candidate", security = {
+      @SecurityRequirement(name = "security")
+  }, responses = {
       @ApiResponse(responseCode = "200", content = {
-          @Content(schema = @Schema(implementation = ProfileCandidateResponseDTO.class)) }),
+          @Content(mediaType = "application/json", schema = @Schema(implementation = ProfileCandidateResponseDTO.class)) }),
       @ApiResponse(responseCode = "400", description = "User not found")
   })
-  @SecurityRequirement(name = "security")
   public ResponseEntity<Object> get(HttpServletRequest request) {
     var idCandidate = request.getAttribute("candidate_id");
 
@@ -87,20 +87,22 @@ public class CandidateController {
 
   @GetMapping("/jobs")
   @PreAuthorize("hasRole('CANDIDATE')")
-  @Operation(summary = "List of vacancies available for the candidate", description = "This role is responsible for listing all available vacancies for the candidate")
-  @ApiResponses({
-      @ApiResponse(responseCode = "200", content = {
-          @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class))) })
-  })
-  @SecurityRequirement(name = "security")
+  @Operation(summary = "List of vacancies available for the candidate", description = "This role is responsible for listing all available vacancies for the candidate", security = {
+      @SecurityRequirement(name = "security") }, parameters = {
+          @Parameter(in = ParameterIn.QUERY, name = "filter", description = "Filter for job listings by language", required = true)
+      }, responses = {
+          @ApiResponse(responseCode = "200", content = {
+              @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = JobEntity.class))) })
+      })
   public List<JobEntity> findJobByFilter(@RequestParam String filter) {
     return listAllJobsByFilterUseCase.execute(filter);
   }
 
   @PostMapping("/jobs/apply")
   @PreAuthorize("hasRole('CANDIDATE')")
-  @Operation(summary = "Candidate registration for a vacancy", description = "This role is responsible for registering the candidate for a vacancy")
-  @SecurityRequirement(name = "security")
+  @Operation(summary = "Candidate registration for a vacancy", description = "This role is responsible for registering the candidate for a vacancy", security = {
+      @SecurityRequirement(name = "security")
+  })
   public ResponseEntity<Object> applyJob(HttpServletRequest request, @RequestBody UUID idJob) {
     var idCandidate = request.getAttribute("candidate_id");
 

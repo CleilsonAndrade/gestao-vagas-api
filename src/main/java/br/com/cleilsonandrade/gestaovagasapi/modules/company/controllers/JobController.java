@@ -18,7 +18,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,20 +25,20 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/companies")
+@Tag(name = "Vacancies", description = "Vacancies information")
 public class JobController {
   @Autowired
   private CreateJobUseCase createJobUseCase;
 
   @PostMapping("/jobs")
   @PreAuthorize("hasRole('COMPANY')")
-  @Tag(name = "Vacancies", description = "Vacancies information")
-  @Operation(summary = "Vacancy registration", description = "This role is responsible for registering the vacancy in the company")
-  @ApiResponses({
+  @Operation(summary = "Vacancy registration", description = "This role is responsible for registering the vacancy in the company", security = {
+      @SecurityRequirement(name = "security")
+  }, responses = {
       @ApiResponse(responseCode = "200", content = {
-          @Content(schema = @Schema(implementation = JobEntity.class))
-      }),
+          @Content(mediaType = "application/json", schema = @Schema(implementation = JobEntity.class))
+      })
   })
-  @SecurityRequirement(name = "security")
   public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
     var companyId = request.getAttribute("company_id");
 

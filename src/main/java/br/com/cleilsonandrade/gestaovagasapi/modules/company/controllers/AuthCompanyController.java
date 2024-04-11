@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cleilsonandrade.gestaovagasapi.modules.company.dto.AuthCompanyDTO;
+import br.com.cleilsonandrade.gestaovagasapi.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.cleilsonandrade.gestaovagasapi.modules.company.useCases.AuthCompanyUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -23,7 +27,10 @@ public class AuthCompanyController {
   private AuthCompanyUseCase authCompanyUseCase;
 
   @PostMapping("/auth")
-  @Operation(summary = "Authentication of company", description = "This function is responsible authenticate a company")
+  @Operation(summary = "Authentication of company", description = "This function is responsible authenticate a company", responses = {
+      @ApiResponse(responseCode = "200", description = "Generated Bearer token and expiration", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthCompanyResponseDTO.class))),
+      @ApiResponse(responseCode = "401", description = "Username or password incorrect")
+  })
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
     try {
       var result = authCompanyUseCase.execute(authCompanyDTO);
