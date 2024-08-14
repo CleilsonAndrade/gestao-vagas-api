@@ -56,8 +56,11 @@ public class AuthCompanyUseCase {
         .withClaim("roles", Arrays.asList("COMPANY"))
         .sign(algorithm);
 
+    var roles = Arrays.asList("COMPANY");
+
     var authCompanyResponseDTO = AuthCompanyResponseDTO.builder()
         .access_token(token)
+        .roles(roles)
         .expires_in(expiresIn.toEpochMilli());
 
     return authCompanyResponseDTO;
