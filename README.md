@@ -19,6 +19,7 @@ Gestão Vagas API é uma API Rest, que foi desenvolvida com de gerenciamento par
 - [x] Realizar o cadastro de um usuário representando a empresa<br>
 - [x] Cadastro de vaga por um usuário com perfil de empresa<br>
 - [x] Realizar o cadastro do usuário com perfil de candidato<br>
+- [x] Listar as vagas cadastradas da empresa para um usuário com perfil de empresa responsável<br>
 - [x] Listar o currículo da usuário com perfil de candidato<br>
 - [x] Listar as vagas disponíveis para o usuário com perfil de candidato por um filtro<br>
 - [x] Aplicar o usuário com perfil de candidato a uma vaga<br>
@@ -53,6 +54,7 @@ Gestão Vagas API é uma API Rest, que foi desenvolvida com de gerenciamento par
 |----------------------|-----------------------------------------------------|----------------------
 | <kbd>POST /companies/auth </kbd> | Responsável por autenticar o usuário com perfil de empresa, gerando o Bearer Token *JWT* | Sim
 | <kbd>POST /companies </kbd> | Responsável por realizar o cadastro de um usuário representando a empresa | Não
+| <kbd>GET /companies </kbd> | Responsável por listar todas as vagas pertencentes a empresa | COMPANY
 | <kbd>POST /companies/jobs </kbd> | Responsável por realizar o cadastro de vaga por um usuário com perfil de empresa | COMPANY
 | <kbd>POST /candidates/auth </kbd> | Responsável por autenticar o usuário com perfil de candidato, gerando o Bearer Token *JWT* | Sim
 | <kbd>GET /candidates </kbd> | Responsável por listar o currículo da usuário com perfil de candidato | CANDIDATE
