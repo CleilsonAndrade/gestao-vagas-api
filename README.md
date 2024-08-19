@@ -50,19 +50,19 @@ Gestão Vagas API é uma API Rest, que foi desenvolvida com de gerenciamento par
 - **Docker**
 
 # 📍 <span id="endpoints">Endpoints</span>
-| Endpoint               | Resumo                                          | Autenticação               | Role
-|----------------------|-----------------------------------------------------|--------------------------|----------------------
-| <kbd>POST /companies/auth </kbd> | Responsável por autenticar o usuário com perfil de empresa, gerando o Bearer Token *JWT* | Sim | *
-| <kbd>POST /companies </kbd> | Responsável por realizar o cadastro de um usuário representando a empresa | Não | *
-| <kbd>GET /companies </kbd> | Responsável por listar todas as vagas pertencentes a empresa | Sim | COMPANY
-| <kbd>POST /companies/jobs </kbd> | Responsável por realizar o cadastro de vaga por um usuário com perfil de empresa | Sim | COMPANY
-| <kbd>POST /candidates/auth </kbd> | Responsável por autenticar o usuário com perfil de candidato, gerando o Bearer Token *JWT* | Sim | *
-| <kbd>GET /candidates </kbd> | Responsável por listar o currículo da usuário com perfil de candidato | Sim | CANDIDATE
-| <kbd>POST /candidates </kbd> | Responsável por realizar o cadastro do usuário com perfil de candidato | Não | *
-| <kbd>GET /candidates/jobs </kbd> | Responsável por listar as vagas disponíveis para o usuário com perfil de candidato informando um *query param* como filtro | Sim | CANDIDATE
-| <kbd>POST /candidates/jobs/apply </kbd> | Responsável por aplicar o usuário com perfil de candidato a uma vaga, informando o ID | Sim | CANDIDATE
-| <kbd>GET /swagger-ui/index.html </kbd> | Responsável por servir a documentação dos recursos da API | Sim | *
-| <kbd>GET /h2-console </kbd> | Responsável por acesso ao *H2 Database* | Sim | *
+| Método | Endpoint               | Resumo                                          | Autenticação               | Role
+|--------|----------------------|-----------------------------------------------------|--------------------------|----------------------
+<kbd>POST</kbd> | <kbd>/companies/auth</kbd> | Responsável por autenticar o usuário com perfil de empresa, gerando o Bearer Token *JWT* | Sim | *
+<kbd>POST</kbd> | <kbd>/companies</kbd> | Responsável por realizar o cadastro de um usuário representando a empresa | Não | *
+<kbd>GET</kbd> | <kbd>/companies</kbd> | Responsável por listar todas as vagas pertencentes a empresa | Sim | COMPANY
+<kbd>POST</kbd> | <kbd>/companies/jobs</kbd> | Responsável por realizar o cadastro de vaga por um usuário com perfil de empresa | Sim | COMPANY
+<kbd>POST</kbd> | <kbd>/candidates/auth</kbd> | Responsável por autenticar o usuário com perfil de candidato, gerando o Bearer Token *JWT* | Sim | *
+<kbd>GET</kbd> | <kbd>/candidates</kbd> | Responsável por listar o currículo da usuário com perfil de candidato | Sim | CANDIDATE
+<kbd>POST</kbd> | <kbd>/candidates</kbd> | Responsável por realizar o cadastro do usuário com perfil de candidato | Não | *
+<kbd>GET</kbd> | <kbd>/candidates/jobs</kbd> | Responsável por listar as vagas disponíveis para o usuário com perfil de candidato informando um *query param* como filtro | Sim | CANDIDATE
+<kbd>POST</kbd> | <kbd>/candidates/jobs/apply</kbd> | Responsável por aplicar o usuário com perfil de candidato a uma vaga, informando o ID | Sim | CANDIDATE
+<kbd>GET</kbd> | <kbd>/swagger-ui/index.html</kbd> | Responsável por servir a documentação dos recursos da API | Sim | *
+<kbd>GET</kbd> | <kbd>/h2-console</kbd> | Responsável por acesso ao *H2 Database* | Sim | *
 
 # 🚀 <span id="instalação">Instalação</span>
 ```bash
