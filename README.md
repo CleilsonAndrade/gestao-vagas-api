@@ -62,7 +62,7 @@ Gestão Vagas API é uma API Rest, que foi desenvolvida com de gerenciamento par
 <kbd>GET</kbd> | <kbd>/candidates/jobs</kbd> | Responsável por listar as vagas disponíveis para o usuário com perfil de candidato informando um *query param* como filtro | Sim | CANDIDATE
 <kbd>POST</kbd> | <kbd>/candidates/jobs/apply</kbd> | Responsável por aplicar o usuário com perfil de candidato a uma vaga, informando o ID | Sim | CANDIDATE
 <kbd>GET</kbd> | <kbd>/swagger-ui/index.html</kbd> | Responsável por servir a documentação dos recursos da API | Sim | *
-<kbd>GET</kbd> | <kbd>/h2-console</kbd> | Responsável por acesso ao *H2 Database* | Sim | *
+<kbd>GET</kbd> | <kbd>/h2-console</kbd> | Responsável por acesso ao *H2 Database* | Não | *
 
 # 🚀 <span id="instalação">Instalação</span>
 ```bash
